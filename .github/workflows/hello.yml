@@ -12,17 +12,9 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
-
-  current_date_job:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Say date
+      - name: Now it is
         run: |
           date
-
-  ls_job:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Say current directory contents (ls)
+      - name: Directory content
         run: |
           ls

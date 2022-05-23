@@ -18,6 +18,8 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fso-pokedex-prb01"
           heroku_email: "p.bergstroem@gmail.com"
+          healthcheck: "https://fso-pokedex-prb01.herokuapp.com/health"
+          checkstring: "ok"
       - name: npm install
         run: npm install
       - name: lint        

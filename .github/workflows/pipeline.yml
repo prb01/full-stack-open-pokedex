@@ -16,7 +16,7 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "fso-pokedex"
+          heroku_app_name: "fso-pokedex-prb01"
           heroku_email: "p.bergstroem@gmail.com"
       - name: npm install
         run: npm install

@@ -13,9 +13,11 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
-      - name: Say hello
-        run: |
-          echo "Hello World!"
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "fso-pokedex"
+          heroku_email: "p.bergstroem@gmail.com"
       - name: npm install
         run: npm install
       - name: lint        
@@ -30,3 +32,4 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      

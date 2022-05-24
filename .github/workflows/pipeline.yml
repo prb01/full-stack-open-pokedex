@@ -31,7 +31,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: heroku deployment
-        if: ${{ github.event_name == 'push' }}  
+        if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message),' '), '#skip') }}  
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -43,6 +43,7 @@ jobs:
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
+    if: ${{ !contains(join(toJson(github.event.commits.*.message),' '), '#skip') }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -54,22 +55,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: patch
-  a_test_job:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-      - name: gihub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: commits
-        env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
-      - name: commit messages
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
-      - name: test if works
-        if: ${{ contains(join(toJson(github.event.commits.*.message),' '), '#skip') }}
-        run: echo "I DID NOT GET SKIPPED. BOOOO"

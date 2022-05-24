@@ -73,5 +73,3 @@ jobs:
       - name: test if works
         if: ${{ contains(join(toJson(github.event.commits.*.message),' '), '#skip') }}
         run: echo "I DID NOT GET SKIPPED. BOOOO"
-
-

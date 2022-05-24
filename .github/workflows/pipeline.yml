@@ -55,6 +55,7 @@ jobs:
           WITH_V: true
           DEFAULT_BUMP: patch
   a_test_job:
+    needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -73,4 +74,4 @@ jobs:
       - name: test if works
         if: ${{ contains(toJson(github.event.commits.*.message), '#skip') }}
         run: echo "I DID NOT GET SKIPPED. BOOOO"
-        
+

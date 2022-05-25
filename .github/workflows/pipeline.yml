@@ -59,7 +59,7 @@ jobs:
         if: github.event_name == 'push' && failure()
         with:
           severity: error
-          text: 'Error during deployed'
+          text: 'Error during deployment'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]

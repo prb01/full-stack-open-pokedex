@@ -8,6 +8,7 @@ jobs:
   test_schedule:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: URL Health Check
         uses: Jtalk/url-health-check-action@v2
         with:
@@ -20,8 +21,6 @@ jobs:
         with:
           severity: info
           text: 'Healthcheck successfull'
-          description: ''
-          details: ''
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Discord | Error
         uses: rjstone/discord-webhook-notify@v1.0.4
@@ -29,6 +28,4 @@ jobs:
         with:
           severity: error
           text: 'Healthcheck issue'
-          description: ''
-          details: ''
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}

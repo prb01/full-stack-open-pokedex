@@ -16,16 +16,16 @@ jobs:
           max-attempts: 3
           retry-delay: 5s
       - name: Discord | Success
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        env:
+            DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }} 
+        uses: Ilshidur/action-discord@0.3.2
         if: success()
         with:
-          severity: info
-          text: 'Healthcheck successfull'
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          args: 'Healthcheck successfull'
       - name: Discord | Error
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }} 
+        uses: Ilshidur/action-discord@0.3.2
         if: failure()
         with:
-          severity: error
-          text: 'Healthcheck issue'
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          args: 'Healthcheck failed'

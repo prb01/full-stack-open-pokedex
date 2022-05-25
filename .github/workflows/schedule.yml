@@ -20,8 +20,6 @@ jobs:
         with:
           severity: info
           text: 'Healthcheck successfull'
-          description: ''
-          details: ''
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Discord | Error
         uses: rjstone/discord-webhook-notify@v1.0.4
@@ -29,6 +27,4 @@ jobs:
         with:
           severity: error
           text: 'Healthcheck issue'
-          description: ''
-          details: ''
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}

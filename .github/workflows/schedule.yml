@@ -8,6 +8,7 @@ jobs:
   test_schedule:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: URL Health Check
         uses: Jtalk/url-health-check-action@v2
         with:
